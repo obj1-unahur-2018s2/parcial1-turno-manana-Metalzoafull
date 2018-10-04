@@ -1,0 +1,45 @@
+import profesionales.*
+import Universidades.*
+import Empresas.*
+describe "empresa"{
+	var juana = new ProfesionalVinculado()
+	var melina = new ProfesionalAsociado()
+	var rocio = new ProfesionalLibre()
+	var luciana = new ProfesionalLibre()
+	var rosario = new Universidad()
+	var corrientes = new Universidad()
+	var hurlingham = new Universidad()
+	
+	fixture	{
+		rosario.setHonorario(2800)
+		rosario.setProvincia("Santa Fe")
+		corrientes.setHonorario(4200)
+		corrientes.setProvincia("Corrientes")
+		hurlingham.setHonorario(8800)
+		hurlingham.setProvincia("Buenos Aires")
+		juana.universidad(rosario)
+		melina.universidad(corrientes)
+		rocio.universidad(hurlingham)
+		luciana.universidad(rosario)
+		rocio.setHonorarios(5000)
+		rocio.setProvinciatrab("Santa Fe")
+		rocio.setProvinciatrab("Cordoba")
+		rocio.setProvinciatrab("Buenos Aires")
+		luciana.setHonorarios(3200)
+		luciana.setProvinciatrab("Santa Fe")
+		luciana.setProvinciatrab("Entre Rios")
+		empresa.aderirTrabajadores(juana)
+		empresa.aderirTrabajadores(melina)
+		empresa.aderirTrabajadores(rocio)
+		empresa.aderirTrabajadores(luciana)
+	}
+	test "empresarial"{
+		assert.equals([rocio],empresa.profesionalesCaros())
+		//assert.equals([juana],empresa.profesionalBarato()) juana me arruina la vida
+		assert.equals(true,empresa.provinciaCubierta("Santa Fe"))
+		assert.equals(true,empresa.provinciaCubierta("Cordoba"))
+	    assert.equals(false,empresa.provinciaCubierta("Misiones"))
+	    //assert.equals(2,empresa.profecionalesContratados(rosario)
+		
+	}
+}
